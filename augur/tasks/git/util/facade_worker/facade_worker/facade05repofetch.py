@@ -452,8 +452,9 @@ def git_repo_updates(session,repo_git):
 
     if return_code == 0:
 
-        set_to_analyze = s.sql.text("""UPDATE repo SET repo_status='Analyze' WHERE repo_id=:repo_id and repo_status != 'Empty'
+        set_to_analyze = s.sql.text("""UPDATE repo SET repo_status='Analyze' WHERE repo_id=:repo_id and repo_status != 'Empty AND repo_id=:repo_id'
             """).bindparams(repo_id=row['repo_id'])
+        
         session.execute_sql(set_to_analyze)
 
         update_repo_log(session, row['repo_id'],'Up-to-date')
