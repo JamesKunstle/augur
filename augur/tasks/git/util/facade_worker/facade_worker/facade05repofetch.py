@@ -56,6 +56,9 @@ def git_repo_initialize(session, repo_git,repo_group_id=None):
         
         #Get data as a list of dicts
         new_repos = session.fetchall_data_from_sql_text(query)#list(cfg.cursor)
+        session.log_activity('Info', f'SPG new_repos is {new_repos}')
+
+
     else:
         session.update_status(f"Fetching repos with repo group id: {repo_group_id}")
         session.log_activity('Info',f"Fetching repos with repo group id: {repo_group_id}")
@@ -64,6 +67,8 @@ def git_repo_initialize(session, repo_git,repo_group_id=None):
          
         query = session.query(Repo).filter('New' in Repo.repo_status, Repo.repo_git == repo_git)
         result = execute_session_query(query, 'all')
+
+        session.log_activity('Info',f'SPG result is {result}')
 
         for repo in result:
             repo_dict = repo.__dict__
