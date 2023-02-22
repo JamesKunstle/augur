@@ -161,7 +161,7 @@ def init_worker(**kwargs):
 
     from augur.application.db.engine import DatabaseEngine
 
-    engine = DatabaseEngine(pool_size=5, max_overflow=10).engine
+    engine = DatabaseEngine(pool_size=9, max_overflow=10).engine
 
 
 @worker_process_shutdown.connect
