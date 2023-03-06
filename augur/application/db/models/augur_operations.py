@@ -663,6 +663,9 @@ class UserRepo(Base):
     repo_id = Column(
         ForeignKey("augur_data.repo.repo_id", name="user_repo_user_id_fkey"), primary_key=True, nullable=False
     )
+    date_added = Column(
+        TIMESTAMP(precision=0), nullable=False, server_default=text("CURRENT_TIMESTAMP")
+    )
 
     repo = relationship("Repo")
     group = relationship("UserGroup")
